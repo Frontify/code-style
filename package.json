@@ -2,7 +2,7 @@
     "name": "@frontify/eslint-config-monorepo",
     "version": "0.0.1",
     "private": true,
-    "packageManager": "pnpm@11.5.0+sha512.dbfcc4f81cf48597afd4bc391ffdf12c11f1a9fb83a395bfa6b0a2d9cc2fd8ffebafdb1ccbd529632153f793904c2615b7f09fe1a345473fd1c35845172a8eb1",
+    "packageManager": "pnpm@11.27.0",
     "author": "Frontify Developers <developers@frontify.com>",
     "license": "MIT",
     "repository": {
@@ -19,24 +19,24 @@
     },
     "devDependencies": {
         "@changesets/changelog-github": "^0.7.0",
-        "@changesets/cli": "^2.31.0",
-        "eslint": "^10.4.1",
+        "@changesets/cli": "^2.31.1",
+        "eslint": "^10.10.0",
         "eslint-plugin-notice": "^1.0.0",
-        "prettier": "^3.8.3",
-        "taze": "^19.14.1",
+        "prettier": "^3.9.6",
+        "taze": "^19.17.2",
         "typescript": "^6.0.3"
     },
     "pnpm": {
         "overrides": {
             "brace-expansion@<1.1.13": ">=1.1.13",
             "brace-expansion@>=4.0.0 <5.0.5": ">=5.0.5",
-            "defu": ">=6.1.5",
-            "flatted": ">=3.4.2",
+            "defu": ">=6.1.7",
+            "flatted": ">=3.4.4",
             "lodash": ">=4.18.0",
-            "minimatch@^3": "npm:minimatch@^3.1.4",
+            "minimatch@^3": "npm:minimatch@^3.1.5",
             "picomatch@<2.3.2": ">=2.3.2",
-            "picomatch@>=4.0.0 <4.0.4": ">=4.0.4",
-            "yaml@>=2.0.0 <2.8.3": ">=2.8.3"
+            "picomatch@>=4.0.0 <4.0.4": ">=4.0.7",
+            "yaml@>=2.0.0 <2.8.3": ">=2.9.1"
         }
     }
 }
