@@ -100,7 +100,6 @@ export default defineConfig({
         'no-else-return': 'warn',
         'no-nested-ternary': 'warn',
         'no-param-reassign': ['warn', { props: true }],
-        'import/no-cycle': 'warn',
         // JSDoc rules check existing blocks only: no block is required, and a summary-only block needs no @param.
         'jsdoc/check-tag-names': 'warn',
         'jsdoc/no-defaults': 'warn',
