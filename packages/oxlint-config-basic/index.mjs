@@ -97,17 +97,17 @@ export default defineConfig({
         complexity: ['warn', { max: 10 }],
         'max-depth': ['warn', { max: 3 }],
         'max-params': ['warn', { max: 3 }],
-        'no-else-return': 'warn',
-        'no-nested-ternary': 'warn',
+        'no-else-return': 'error',
+        'no-nested-ternary': 'error',
         'no-param-reassign': ['warn', { props: true }],
         // JSDoc rules check existing blocks only: no block is required, and a summary-only block needs no @param.
-        'jsdoc/check-tag-names': 'warn',
-        'jsdoc/no-defaults': 'warn',
-        'jsdoc/require-param': ['warn', { ignoreWhenAllParamsMissing: true }],
-        'jsdoc/require-param-description': 'warn',
-        'jsdoc/require-returns-description': 'warn',
-        'jsdoc-js/check-param-names': 'warn',
-        'jsdoc-js/require-hyphen-before-param-description': 'warn',
+        'jsdoc/check-tag-names': 'error',
+        'jsdoc/no-defaults': 'error',
+        'jsdoc/require-param': ['error', { ignoreWhenAllParamsMissing: true }],
+        'jsdoc/require-param-description': 'error',
+        'jsdoc/require-returns-description': 'error',
+        'jsdoc-js/check-param-names': 'error',
+        'jsdoc-js/require-hyphen-before-param-description': 'error',
     },
     overrides: [
         {
@@ -557,9 +557,9 @@ export default defineConfig({
                 'typescript/restrict-template-expressions': 'error',
                 'typescript/unbound-method': 'off',
                 // TypeScript carries the types; in plain JS, JSDoc braces are the only type information.
-                'jsdoc-js/no-types': 'warn',
+                'jsdoc-js/no-types': 'error',
                 'typescript/switch-exhaustiveness-check': [
-                    'warn',
+                    'error',
                     { considerDefaultExhaustiveForUnions: true },
                 ],
                 'typescript/consistent-type-imports': [

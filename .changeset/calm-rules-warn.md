@@ -3,4 +3,4 @@
 '@frontify/oxlint-config-react': minor
 ---
 
-feat: warn on code-quality rules (`complexity`, `max-depth`, `max-params`, `no-else-return`, `no-nested-ternary`, `no-param-reassign`, `typescript/switch-exhaustiveness-check`), off in tests and stories, and on JSDoc shape rules for existing doc blocks
+feat: error on `no-else-return`, `no-nested-ternary`, `typescript/switch-exhaustiveness-check` and JSDoc shape rules for existing doc blocks; warn on `complexity`, `max-depth`, `max-params` and `no-param-reassign`. The size and style rules are off in tests and stories.
