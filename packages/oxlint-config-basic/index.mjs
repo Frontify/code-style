@@ -89,6 +89,14 @@ export default defineConfig({
         'typescript/restrict-template-expressions': 'error',
         'typescript/triple-slash-reference': 'error',
         'typescript/unbound-method': 'error',
+        // Code-quality rules start as warnings; raise to error once consumers are clean.
+        complexity: ['warn', { max: 10 }],
+        'max-depth': ['warn', { max: 3 }],
+        'max-params': ['warn', { max: 3 }],
+        'no-else-return': 'warn',
+        'no-nested-ternary': 'warn',
+        'no-param-reassign': ['warn', { props: true }],
+        'import/no-cycle': 'warn',
     },
     overrides: [
         {
@@ -537,6 +545,10 @@ export default defineConfig({
                 'typescript/restrict-plus-operands': 'error',
                 'typescript/restrict-template-expressions': 'error',
                 'typescript/unbound-method': 'off',
+                'typescript/switch-exhaustiveness-check': [
+                    'warn',
+                    { considerDefaultExhaustiveForUnions: true },
+                ],
                 'typescript/consistent-type-imports': [
                     'error',
                     { prefer: 'type-imports', fixStyle: 'inline-type-imports' },
@@ -669,6 +681,22 @@ export default defineConfig({
                 'typescript/unbound-method': 'off',
             },
             jsPlugins: ['eslint-plugin-no-only-tests'],
+        },
+        {
+            files: [
+                '**/*.test.{ts,tsx,js,jsx}',
+                '**/*.spec.{ts,tsx,js,jsx}',
+                '**/*.spec.{cy,ct}.{ts,tsx,js,jsx}',
+                '**/*.stories.{ts,tsx,js,jsx}',
+            ],
+            rules: {
+                complexity: 'off',
+                'max-depth': 'off',
+                'max-params': 'off',
+                'no-else-return': 'off',
+                'no-nested-ternary': 'off',
+                'no-param-reassign': 'off',
+            },
         },
         {
             files: ['**/*.ts', '**/*.tsx', '**/*.mts', '**/*.cts'],
