@@ -108,7 +108,6 @@ export default defineConfig({
         'jsdoc/require-param-description': 'warn',
         'jsdoc/require-returns-description': 'warn',
         'jsdoc-js/check-param-names': 'warn',
-        'jsdoc-js/no-types': 'warn',
         'jsdoc-js/require-hyphen-before-param-description': 'warn',
     },
     overrides: [
@@ -558,6 +557,8 @@ export default defineConfig({
                 'typescript/restrict-plus-operands': 'error',
                 'typescript/restrict-template-expressions': 'error',
                 'typescript/unbound-method': 'off',
+                // TypeScript carries the types; in plain JS, JSDoc braces are the only type information.
+                'jsdoc-js/no-types': 'warn',
                 'typescript/switch-exhaustiveness-check': [
                     'warn',
                     { considerDefaultExhaustiveForUnions: true },
