@@ -3,8 +3,12 @@
 import { defineConfig } from 'oxlint';
 
 export default defineConfig({
-    plugins: ['typescript', 'eslint', 'promise', 'unicorn', 'import'],
-    jsPlugins: ['@eslint-community/eslint-plugin-eslint-comments'],
+    plugins: ['typescript', 'eslint', 'promise', 'unicorn', 'import', 'jsdoc'],
+    jsPlugins: [
+        '@eslint-community/eslint-plugin-eslint-comments',
+        // Aliased: the native jsdoc plugin lacks these rules and owns the `jsdoc` name.
+        { name: 'jsdoc-js', specifier: 'eslint-plugin-jsdoc' },
+    ],
     categories: {
         correctness: 'off',
     },
@@ -97,6 +101,15 @@ export default defineConfig({
         'no-nested-ternary': 'warn',
         'no-param-reassign': ['warn', { props: true }],
         'import/no-cycle': 'warn',
+        // JSDoc rules check existing blocks only: no block is required, and a summary-only block needs no @param.
+        'jsdoc/check-tag-names': 'warn',
+        'jsdoc/no-defaults': 'warn',
+        'jsdoc/require-param': ['warn', { ignoreWhenAllParamsMissing: true }],
+        'jsdoc/require-param-description': 'warn',
+        'jsdoc/require-returns-description': 'warn',
+        'jsdoc-js/check-param-names': 'warn',
+        'jsdoc-js/no-types': 'warn',
+        'jsdoc-js/require-hyphen-before-param-description': 'warn',
     },
     overrides: [
         {
