@@ -683,11 +683,17 @@ export default defineConfig({
             // Tests and stories favour readable, inline fixtures over small, flat functions.
             files: [...TEST_FILES, '**/*.stories.{ts,tsx,js,jsx}'],
             rules: {
+                // A test or story callback holds a whole scenario, so it branches more than production code.
                 complexity: 'off',
+                // describe, it and render callbacks nest by design.
                 'max-depth': 'off',
+                // Test helpers and story renderers mirror the signature of the API they exercise.
                 'max-params': 'off',
+                // Mock implementations read as a list of cases.
                 'no-else-return': 'off',
+                // Story args pick a variant inline in one expression.
                 'no-nested-ternary': 'off',
+                // Mocks and fixtures set up the objects they are handed.
                 'no-param-reassign': 'off',
             },
         },
