@@ -2,9 +2,15 @@
 
 import { defineConfig } from 'oxlint';
 
+const TEST_FILES = ['**/*.test.{ts,tsx,js,jsx}', '**/*.spec.{ts,tsx,js,jsx}', '**/*.spec.{cy,ct}.{ts,tsx,js,jsx}'];
+
 export default defineConfig({
-    plugins: ['typescript', 'eslint', 'promise', 'unicorn', 'import'],
-    jsPlugins: ['@eslint-community/eslint-plugin-eslint-comments'],
+    plugins: ['typescript', 'eslint', 'promise', 'unicorn', 'import', 'jsdoc'],
+    jsPlugins: [
+        '@eslint-community/eslint-plugin-eslint-comments',
+        // Aliased: the native jsdoc plugin lacks these rules and owns the `jsdoc` name.
+        { name: 'jsdoc-js', specifier: 'eslint-plugin-jsdoc' },
+    ],
     categories: {
         correctness: 'off',
     },
@@ -49,6 +55,7 @@ export default defineConfig({
         '@eslint-community/eslint-comments/no-duplicate-disable': 'error',
         '@eslint-community/eslint-comments/no-unlimited-disable': 'error',
         '@eslint-community/eslint-comments/no-unused-enable': 'error',
+        '@eslint-community/eslint-comments/require-description': 'error',
         'typescript/await-thenable': 'error',
         'typescript/ban-ts-comment': 'error',
         'typescript/no-array-delete': 'error',
@@ -89,6 +96,21 @@ export default defineConfig({
         'typescript/restrict-template-expressions': 'error',
         'typescript/triple-slash-reference': 'error',
         'typescript/unbound-method': 'error',
+        // Size and mutation rules warn until consumers are clean; the rest are errors.
+        complexity: ['warn', { max: 10 }],
+        'max-depth': ['warn', { max: 3 }],
+        'max-params': ['warn', { max: 3 }],
+        'no-else-return': 'error',
+        'no-nested-ternary': 'error',
+        'no-param-reassign': ['warn', { props: true }],
+        // JSDoc rules check existing blocks only: no block is required, and a summary-only block needs no @param.
+        'jsdoc/check-tag-names': 'error',
+        'jsdoc/no-defaults': 'error',
+        'jsdoc/require-param': ['error', { ignoreWhenAllParamsMissing: true }],
+        'jsdoc/require-param-description': 'error',
+        'jsdoc/require-returns-description': 'error',
+        'jsdoc-js/check-param-names': 'error',
+        'jsdoc-js/require-hyphen-before-param-description': 'error',
     },
     overrides: [
         {
@@ -112,7 +134,6 @@ export default defineConfig({
                 'no-dupe-else-if': 'error',
                 'no-dupe-keys': 'error',
                 'no-duplicate-case': 'error',
-                'no-empty': 'error',
                 'no-empty-character-class': 'error',
                 'no-empty-pattern': 'error',
                 'no-empty-static-block': 'error',
@@ -145,7 +166,6 @@ export default defineConfig({
                 'no-unused-labels': 'error',
                 'no-unused-private-class-members': 'error',
                 'no-useless-backreference': 'error',
-                'no-useless-catch': 'error',
                 'no-useless-escape': 'error',
                 'no-with': 'error',
                 'preserve-caught-error': 'error',
@@ -440,6 +460,8 @@ export default defineConfig({
                 node: true,
             },
             rules: {
+                'no-empty': 'error',
+                'no-useless-catch': 'error',
                 'prefer-template': 'error',
                 'no-var': 'error',
                 eqeqeq: 'error',
@@ -492,6 +514,7 @@ export default defineConfig({
                 'unicorn/throw-new-error': 'error',
                 'unicorn/prefer-node-protocol': 'error',
                 'unicorn/no-array-for-each': 'error',
+                'unicorn/no-array-reduce': 'error',
                 'unicorn/custom-error-definition': 'error',
                 'unicorn/explicit-length-check': 'error',
                 'unicorn/no-await-expression-member': 'error',
@@ -537,6 +560,9 @@ export default defineConfig({
                 'typescript/restrict-plus-operands': 'error',
                 'typescript/restrict-template-expressions': 'error',
                 'typescript/unbound-method': 'off',
+                // TypeScript carries the types; in plain JS, JSDoc braces are the only type information.
+                'jsdoc-js/no-types': 'error',
+                'typescript/switch-exhaustiveness-check': 'error',
                 'typescript/consistent-type-imports': [
                     'error',
                     { prefer: 'type-imports', fixStyle: 'inline-type-imports' },
@@ -645,30 +671,31 @@ export default defineConfig({
             },
         },
         {
-            files: [
-                '**/*.test.ts',
-                '**/*.test.tsx',
-                '**/*.test.js',
-                '**/*.test.jsx',
-                '**/*.spec.ts',
-                '**/*.spec.tsx',
-                '**/*.spec.js',
-                '**/*.spec.jsx',
-                '**/*.spec.cy.ts',
-                '**/*.spec.cy.tsx',
-                '**/*.spec.cy.js',
-                '**/*.spec.cy.jsx',
-                '**/*.spec.ct.ts',
-                '**/*.spec.ct.tsx',
-                '**/*.spec.ct.js',
-                '**/*.spec.ct.jsx',
-            ],
+            files: TEST_FILES,
             rules: {
                 'no-unused-expressions': 'off',
                 'no-only-tests/no-only-tests': 'error',
                 'typescript/unbound-method': 'off',
             },
             jsPlugins: ['eslint-plugin-no-only-tests'],
+        },
+        {
+            // Tests and stories favour readable, inline fixtures over small, flat functions.
+            files: [...TEST_FILES, '**/*.stories.{ts,tsx,js,jsx}'],
+            rules: {
+                // A test or story callback holds a whole scenario, so it branches more than production code.
+                complexity: 'off',
+                // describe, it and render callbacks nest by design.
+                'max-depth': 'off',
+                // Test helpers and story renderers mirror the signature of the API they exercise.
+                'max-params': 'off',
+                // Mock implementations read as a list of cases.
+                'no-else-return': 'off',
+                // Story args pick a variant inline in one expression.
+                'no-nested-ternary': 'off',
+                // Mocks and fixtures set up the objects they are handed.
+                'no-param-reassign': 'off',
+            },
         },
         {
             files: ['**/*.ts', '**/*.tsx', '**/*.mts', '**/*.cts'],
