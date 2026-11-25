@@ -5,6 +5,7 @@
 import eslint from '@eslint/js';
 import eslintPluginMarkdown from '@eslint/markdown';
 import eslintPluginComments from '@eslint-community/eslint-plugin-eslint-comments/configs';
+import frontifyPlugin from '@frontify/eslint-plugin';
 import eslintPluginStylistic from '@stylistic/eslint-plugin';
 import { defineConfig } from 'eslint/config';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
@@ -339,7 +340,10 @@ export default defineConfig(
     {
         // TypeScript files
         files: ['**/*.ts', '**/*.tsx', '**/*.mts', '**/*.cts'],
+        plugins: { '@frontify': frontifyPlugin },
         rules: {
+            '@frontify/no-inline-param-type': 'error',
+
             // As we're using @typescript-eslint it's recommended to turn off
             // the standard eslint rule for unused variables and use the @typescript-eslint rule instead.
             // See here: https://typescript-eslint.io/rules/no-unused-vars/

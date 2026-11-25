@@ -41,6 +41,9 @@ importers:
       '@eslint/markdown':
         specifier: ^8.0.2
         version: 8.0.2
+      '@frontify/eslint-plugin':
+        specifier: workspace:^
+        version: link:../eslint-plugin
       '@stylistic/eslint-plugin':
         specifier: ^5.10.0
         version: 5.10.0(eslint@10.4.1(jiti@2.7.0))
@@ -136,6 +139,9 @@ importers:
 
   packages/eslint-plugin:
     devDependencies:
+      '@typescript-eslint/parser':
+        specifier: ^8.60.0
+        version: 8.60.0(eslint@10.4.1(jiti@2.7.0))(typescript@6.0.3)
       eslint:
         specifier: ^10.4.1
         version: 10.4.1(jiti@2.7.0)
@@ -151,6 +157,9 @@ importers:
       '@eslint-community/eslint-plugin-eslint-comments':
         specifier: ^4.7.2
         version: 4.7.2(eslint@10.4.1(jiti@2.7.0))
+      '@frontify/eslint-plugin':
+        specifier: workspace:^
+        version: link:../eslint-plugin
       '@stylistic/eslint-plugin':
         specifier: ^5.10.0
         version: 5.10.0(eslint@10.4.1(jiti@2.7.0))
@@ -175,9 +184,6 @@ importers:
       '@eslint-react/eslint-plugin':
         specifier: ^5.8.9
         version: 5.8.9(eslint@10.4.1(jiti@2.7.0))(typescript@6.0.3)
-      '@frontify/eslint-plugin':
-        specifier: workspace:^
-        version: link:../eslint-plugin
       '@frontify/oxlint-config-basic':
         specifier: workspace:^
         version: link:../oxlint-config-basic

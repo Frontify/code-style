@@ -14,7 +14,8 @@ export default defineConfig({
     plugins: ['typescript', 'eslint', 'promise', 'unicorn', 'import', 'jsdoc'],
     jsPlugins: [
         '@eslint-community/eslint-plugin-eslint-comments',
-        // Resolve from this package so consumers can use isolated installs.
+        // Resolve these dependencies here so consumers can use isolated installs.
+        { name: '@frontify', specifier: fileURLToPath(import.meta.resolve('@frontify/eslint-plugin')) },
         { name: 'jsdoc-js', specifier: fileURLToPath(import.meta.resolve('eslint-plugin-jsdoc')) },
     ],
     categories: {
@@ -575,6 +576,7 @@ export default defineConfig({
         {
             files: ['**/*.ts', '**/*.tsx', '**/*.mts', '**/*.cts'],
             rules: {
+                '@frontify/no-inline-param-type': 'error',
                 'no-unused-vars': [
                     'error',
                     { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },

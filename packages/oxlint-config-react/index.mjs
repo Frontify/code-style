@@ -1,7 +1,5 @@
 /* (c) Copyright Frontify Ltd., all rights reserved. */
 
-import { fileURLToPath } from 'node:url';
-
 import basicConfig from '@frontify/oxlint-config-basic';
 import { defineConfig } from 'oxlint';
 
@@ -156,9 +154,6 @@ export default defineConfig({
     overrides: [
         {
             files: ['**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}'],
-            jsPlugins: [
-                { name: '@frontify', specifier: fileURLToPath(import.meta.resolve('@frontify/eslint-plugin')) },
-            ],
             rules: {
                 '@frontify/jsx-shorthand-boolean': 'error',
             },

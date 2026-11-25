@@ -22,7 +22,6 @@
     },
     "dependencies": {
         "@eslint-react/eslint-plugin": "^5.8.9",
-        "@frontify/eslint-plugin": "workspace:^",
         "@frontify/oxlint-config-basic": "workspace:^"
     },
     "publishConfig": {
