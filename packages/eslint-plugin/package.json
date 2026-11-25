@@ -15,12 +15,14 @@
     },
     "files": [
         "index.mjs",
-        "rules/jsx-shorthand-boolean.mjs"
+        "rules/jsx-shorthand-boolean.mjs",
+        "rules/no-inline-param-type.mjs"
     ],
     "scripts": {
         "test": "node --test 'rules/**/*.test.mjs'"
     },
     "devDependencies": {
+        "@typescript-eslint/parser": "^8.60.0",
         "eslint": "^10.4.1"
     },
     "publishConfig": {

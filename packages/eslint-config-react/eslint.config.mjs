@@ -12,7 +12,12 @@ export default defineConfig(
     eslintPluginReact.configs['recommended-type-checked'],
     {
         // Keep existing rule overrides and suppressions valid.
-        plugins: { '@eslint-react/kit': frontifyPlugin },
+        plugins: {
+            '@eslint-react/kit': {
+                meta: frontifyPlugin.meta,
+                rules: { 'jsx-shorthand-boolean': frontifyPlugin.rules['jsx-shorthand-boolean'] },
+            },
+        },
     },
     {
         files: ['**/*.{js,mjs,cjs,jsx,ts,tsx,mts,cts}'],

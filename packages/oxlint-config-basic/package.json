@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "@eslint-community/eslint-plugin-eslint-comments": "^4.7.2",
+        "@frontify/eslint-plugin": "workspace:^",
         "@stylistic/eslint-plugin": "^5.10.0",
         "eslint-plugin-jsdoc": "^65.4.5",
         "eslint-plugin-jsonc": "^3.2.0",
