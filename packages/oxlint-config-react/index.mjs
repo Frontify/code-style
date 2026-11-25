@@ -1,5 +1,7 @@
 /* (c) Copyright Frontify Ltd., all rights reserved. */
 
+import { fileURLToPath } from 'node:url';
+
 import basicConfig from '@frontify/oxlint-config-basic';
 import { defineConfig } from 'oxlint';
 
@@ -152,14 +154,15 @@ export default defineConfig({
         'jsx-a11y/tabindex-no-positive': 'error',
     },
     overrides: [
-        // TODO: fix me when the kit plugin can be loaded in oxlint
-        // {
-        //     files: ['**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}'],
-        //     jsPlugins: ['@eslint-react/kit'],
-        //     rules: {
-        //         '@eslint-react/kit/jsx-shorthand-boolean': 'error',
-        //     },
-        // },
+        {
+            files: ['**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}'],
+            jsPlugins: [
+                { name: '@frontify', specifier: fileURLToPath(import.meta.resolve('@frontify/eslint-plugin')) },
+            ],
+            rules: {
+                '@frontify/jsx-shorthand-boolean': 'error',
+            },
+        },
         {
             files: ['**/*.{js,jsx,ts,tsx}'],
             jsPlugins: ['@eslint-react/eslint-plugin'],

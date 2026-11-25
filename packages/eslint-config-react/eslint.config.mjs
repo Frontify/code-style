@@ -1,20 +1,19 @@
 // @ts-check
 
 import eslintPluginReact from '@eslint-react/eslint-plugin';
-import eslintReactKit from '@eslint-react/kit';
 import basicConfig from '@frontify/eslint-config-basic';
+import frontifyPlugin from '@frontify/eslint-plugin';
 import { defineConfig } from 'eslint/config';
-// @ts-expect-error No types available
 import eslintPluginJsxA11yX from 'eslint-plugin-jsx-a11y-x';
-
-import { jsxShorthandBoolean } from './rules/jsx-shorthand-boolean.mjs';
 
 export default defineConfig(
     basicConfig,
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument
-    eslintPluginJsxA11yX.flatConfigs.recommended,
+    eslintPluginJsxA11yX.configs.recommended,
     eslintPluginReact.configs['recommended-type-checked'],
-    eslintReactKit().use(jsxShorthandBoolean).getConfig(),
+    {
+        // Keep existing rule overrides and suppressions valid.
+        plugins: { '@eslint-react/kit': frontifyPlugin },
+    },
     {
         files: ['**/*.{js,mjs,cjs,jsx,ts,tsx,mts,cts}'],
         languageOptions: {

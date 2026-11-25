@@ -105,12 +105,12 @@ importers:
       '@eslint-react/eslint-plugin':
         specifier: ^5.8.9
         version: 5.8.9(eslint@10.4.1(jiti@2.7.0))(typescript@6.0.3)
-      '@eslint-react/kit':
-        specifier: ^5.8.9
-        version: 5.8.9(eslint@10.4.1(jiti@2.7.0))(typescript@6.0.3)
       '@frontify/eslint-config-basic':
         specifier: workspace:^
         version: link:../eslint-config-basic
+      '@frontify/eslint-plugin':
+        specifier: workspace:^
+        version: link:../eslint-plugin
       eslint-plugin-jsx-a11y-x:
         specifier: ^0.2.0
         version: 0.2.0(eslint@10.4.1(jiti@2.7.0))
@@ -133,6 +133,12 @@ importers:
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
+
+  packages/eslint-plugin:
+    devDependencies:
+      eslint:
+        specifier: ^10.4.1
+        version: 10.4.1(jiti@2.7.0)
 
   packages/oxfmt-config:
     dependencies:
@@ -169,9 +175,9 @@ importers:
       '@eslint-react/eslint-plugin':
         specifier: ^5.8.9
         version: 5.8.9(eslint@10.4.1(jiti@2.7.0))(typescript@6.0.3)
-      '@eslint-react/kit':
-        specifier: ^5.8.9
-        version: 5.8.9(eslint@10.4.1(jiti@2.7.0))(typescript@6.0.3)
+      '@frontify/eslint-plugin':
+        specifier: workspace:^
+        version: link:../eslint-plugin
       '@frontify/oxlint-config-basic':
         specifier: workspace:^
         version: link:../oxlint-config-basic
@@ -331,13 +337,6 @@ packages:
 
   '@eslint-react/jsx@5.8.9':
     resolution: {integrity: sha512-/P1JpU6CMZDkxelithfPTqxOFY4sWI4Jb7Pgakfuhp2a/nczNLyzufyt4veNQkhHW3hpQoRldhVEuzZdWj0hww==}
-    engines: {node: '>=22.0.0'}
-    peerDependencies:
-      eslint: ^10.3.0
-      typescript: '*'
-
-  '@eslint-react/kit@5.8.9':
-    resolution: {integrity: sha512-5++nkmc7P7vFFylKbAQLtg+vCvNrw0iqDJOMrcMjgEdjAbsPlU33EacyAurhKPjzBjVtJPNf5nUPDlbCaBaX6A==}
     engines: {node: '>=22.0.0'}
     peerDependencies:
       eslint: ^10.3.0
@@ -2484,19 +2483,6 @@ snapshots:
       '@typescript-eslint/utils': 8.60.0(eslint@10.4.1(jiti@2.7.0))(typescript@6.0.3)
       eslint: 10.4.1(jiti@2.7.0)
       ts-pattern: 5.9.0
-      typescript: 6.0.3
-    transitivePeerDependencies:
-      - supports-color
-
-  '@eslint-react/kit@5.8.9(eslint@10.4.1(jiti@2.7.0))(typescript@6.0.3)':
-    dependencies:
-      '@eslint-react/ast': 5.8.9(eslint@10.4.1(jiti@2.7.0))(typescript@6.0.3)
-      '@eslint-react/core': 5.8.9(eslint@10.4.1(jiti@2.7.0))(typescript@6.0.3)
-      '@eslint-react/shared': 5.8.9(eslint@10.4.1(jiti@2.7.0))(typescript@6.0.3)
-      '@typescript-eslint/types': 8.60.0
-      '@typescript-eslint/utils': 8.60.0(eslint@10.4.1(jiti@2.7.0))(typescript@6.0.3)
-      eslint: 10.4.1(jiti@2.7.0)
-      string-ts: 2.3.1
       typescript: 6.0.3
     transitivePeerDependencies:
       - supports-color

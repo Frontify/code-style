@@ -11,12 +11,10 @@
     },
     "main": "eslint.config.mjs",
     "files": [
-        "rules",
         "eslint.config.mjs"
     ],
     "scripts": {
         "lint": "eslint .",
-        "test": "node --test 'rules/**/*.test.mjs'",
         "typecheck": "tsc --noEmit"
     },
     "peerDependencies": {
@@ -27,8 +25,8 @@
     },
     "dependencies": {
         "@eslint-react/eslint-plugin": "^5.8.9",
-        "@eslint-react/kit": "^5.8.9",
         "@frontify/eslint-config-basic": "workspace:^",
+        "@frontify/eslint-plugin": "workspace:^",
         "eslint-plugin-jsx-a11y-x": "^0.2.0",
         "globals": "^17.6.0",
         "typescript-eslint": "^8.60.0"
