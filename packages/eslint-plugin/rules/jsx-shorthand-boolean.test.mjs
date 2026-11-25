@@ -1,9 +1,9 @@
-import eslintReactKit from '@eslint-react/kit';
+/* (c) Copyright Frontify Ltd., all rights reserved. */
+
 import { RuleTester } from 'eslint';
 
-import { jsxShorthandBoolean } from './jsx-shorthand-boolean.mjs';
+import plugin from '../index.mjs';
 
-const plugin = eslintReactKit().use(jsxShorthandBoolean).getPlugin();
 const rule = plugin.rules['jsx-shorthand-boolean'];
 
 const ruleTester = new RuleTester({
@@ -15,7 +15,12 @@ const ruleTester = new RuleTester({
 });
 
 ruleTester.run('jsx-shorthand-boolean', rule, {
-    valid: [{ code: '<Foo bar />' }, { code: '<Foo bar={false} />' }, { code: '<Foo bar={someVariable} />' }],
+    valid: [
+        { code: '<Foo bar />' },
+        { code: '<Foo bar={false} />' },
+        { code: '<Foo bar={someVariable} />' },
+        { code: '<Foo bar="true" />' },
+    ],
     invalid: [
         {
             code: '<Foo bar={true} />',
