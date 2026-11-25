@@ -1,15 +1,21 @@
 /* (c) Copyright Frontify Ltd., all rights reserved. */
 
+import { fileURLToPath } from 'node:url';
+
 import { defineConfig } from 'oxlint';
 
 const TEST_FILES = ['**/*.test.{ts,tsx,js,jsx}', '**/*.spec.{ts,tsx,js,jsx}', '**/*.spec.{cy,ct}.{ts,tsx,js,jsx}'];
+const FUNCTIONS_WITH_DEFAULTS =
+    ':function:has(> AssignmentPattern, > ObjectPattern:has(> Property[value.type="AssignmentPattern"]))';
+const DEFAULT_VALUE_TEXT = '\\S';
+const DEFAULT_VALUE_MESSAGE = 'Add the default value after @default.';
 
 export default defineConfig({
     plugins: ['typescript', 'eslint', 'promise', 'unicorn', 'import', 'jsdoc'],
     jsPlugins: [
         '@eslint-community/eslint-plugin-eslint-comments',
-        // Aliased: the native jsdoc plugin lacks these rules and owns the `jsdoc` name.
-        { name: 'jsdoc-js', specifier: 'eslint-plugin-jsdoc' },
+        // Resolve from this package so consumers can use isolated installs.
+        { name: 'jsdoc-js', specifier: fileURLToPath(import.meta.resolve('eslint-plugin-jsdoc')) },
     ],
     categories: {
         correctness: 'off',
@@ -111,6 +117,33 @@ export default defineConfig({
         'jsdoc/require-returns-description': 'error',
         'jsdoc-js/check-param-names': 'error',
         'jsdoc-js/require-hyphen-before-param-description': 'error',
+        'jsdoc-js/require-description': [
+            'error',
+            {
+                contexts: [
+                    'ArrowFunctionExpression',
+                    'FunctionDeclaration',
+                    'FunctionExpression',
+                    'ClassDeclaration',
+                    'VariableDeclaration',
+                    'TSTypeAliasDeclaration',
+                    'TSInterfaceDeclaration',
+                    'TSPropertySignature',
+                    'PropertyDefinition',
+                ],
+                exemptedBy: ['inheritdoc', 'type'],
+            },
+        ],
+        'jsdoc-js/require-tags': ['error', { tags: [{ tag: 'default', context: FUNCTIONS_WITH_DEFAULTS }] }],
+        'jsdoc-js/match-description': [
+            'error',
+            {
+                contexts: ['any'],
+                mainDescription: false,
+                nonemptyTags: false,
+                tags: { default: { match: DEFAULT_VALUE_TEXT, message: DEFAULT_VALUE_MESSAGE } },
+            },
+        ],
     },
     overrides: [
         {

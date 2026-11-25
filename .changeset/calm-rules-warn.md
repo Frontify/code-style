@@ -3,4 +3,8 @@
 '@frontify/oxlint-config-react': minor
 ---
 
-feat: error on `no-else-return`, `no-nested-ternary`, `unicorn/no-array-reduce`, `eslint-comments/require-description` and JSDoc shape rules for existing doc blocks, and in TypeScript files on `typescript/switch-exhaustiveness-check` (a `default` no longer counts as covering a union) and `jsdoc-js/no-types`; `no-empty` and `no-useless-catch` now apply to TypeScript files too. Warn on `complexity`, `max-depth`, `max-params` and `no-param-reassign`. `complexity`, `max-depth`, `max-params`, `no-else-return`, `no-nested-ternary` and `no-param-reassign` are off in tests and stories.
+Report nested ternaries, redundant `else` branches, array `reduce`, and lint exceptions without a reason as errors. Apply the existing errors for empty blocks and redundant catch clauses to TypeScript. Require an explicit switch case for every member of a TypeScript union.
+
+Check existing JSDoc for summaries and tag formatting. If a documented function has a parameter or destructured prop with a default, include an `@default` tag with its value. Keep JSDoc types in JavaScript and use TypeScript annotations in TypeScript.
+
+Warn about function complexity, nesting depth, parameter count, and parameter mutation. Tests and stories omit those warnings and the errors for nested ternaries and redundant `else` branches.
